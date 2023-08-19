@@ -7,12 +7,18 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BASEURL } from "../helper";
 function Home() {
-  let userid = window.localStorage.getItem("name");
+  let userid = window.localStorage.getItem("userid");
   const [mydata, setdata] = useState([]);
   const [open, setopen] = useState(false);
   const [cookies, Setcookiet] = useCookies(["access_token"]);
   const [, Setcookie] = useCookies(["name"]);
   let navigate = useNavigate();
+
+  // for sending the required nav items to header
+
+  // const navitems={
+
+  // }
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -51,66 +57,77 @@ function Home() {
 
   return (
     <div className="homebackground">
-    <div className="Homepage-container">
-      <nav class="navbar navbar-expand-lg bg-body-tertiary px-5 ">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="/posts/Home">
-            Daily-Journels
-          </a>
+      <div className="Homepage-container">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary px-5 ">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="/posts/Home">
+              Daily-Journels
+            </a>
 
-          <div>
-            <ul class="navbar-nav">
-            <li class="nav-item px-5 py-3" className="nav-link">
-              <Link
-                  to={`/posts/Home`}
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  <b>Home</b>
-                </Link>
-              </li>
-              <li class="nav-item px-5 py-3" className="nav-link">
-                <Link
-                  to={`/posts/mypost/${userid}`}
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  <b>Myposts</b>
-                </Link>
-              </li>
-              
-              <li class="nav-item px-5 py-3" className="nav-link">
-                <b onClick={logout} style={{ cursor: "pointer", font: "bold" }}>
-                  logout
-                </b>
-              </li>
-            </ul>
+            <div>
+              <ul class="navbar-nav">
+                <li class="nav-item px-5 py-3" className="nav-link">
+                  <Link
+                    to={`/posts/Home`}
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    <b>Home</b>
+                  </Link>
+                </li>
+                <li class="nav-item px-5 py-3" className="nav-link">
+                  <Link
+                    to={`/posts/mypost/${userid}`}
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    <b>Myposts</b>
+                  </Link>
+                </li>
+                <li class="nav-item px-5 py-3" className="nav-link">
+                  <Link
+                    to={`/posts/fav/${userid}`}
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    <b>Favorites</b>
+                  </Link>
+                </li>
+
+                <li class="nav-item px-5 py-3" className="nav-link">
+                  <b
+                    onClick={logout}
+                    style={{ cursor: "pointer", font: "bold" }}
+                  >
+                    logout
+                  </b>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-      </nav>
-      <div className="input-box">
-        <div className="inputbox">
-          <input
-            type="none"
-            placeholder="Start a Post"
-            value=""
-            onClick={hanldeonclick}
+        </nav>
+        <div className="input-box">
+          <div className="inputbox">
+            <input
+              type="none"
+              placeholder="Start a Post"
+              value=""
+              onClick={hanldeonclick}
+            />
+          </div>
+          <Modalops
+            open={open}
+            handleclose={handleclose}
+            handlecancel={handlecancel}
+            handlePostData={handlepost}
+            home={true}
           />
         </div>
-        <Modalops
-          open={open}
-          handleclose={handleclose}
-          handlecancel={handlecancel}
-          handlePostData={handlepost}
-          home={true}
-        />
+        <div className="posts ">
+          {mydata.map((item) => (
+            <div className="singlepost shadow  bg-#aaa8a7 rounded">
+              <Post key={item.id} item={item} />
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="posts ">
-        {mydata.map((item) => (
-          <div className="singlepost shadow  bg-#aaa8a7 rounded" >
-            <Post key={item.id} item={item} />
-          </div>
-        ))}
-      </div>
-    </div>
     </div>
   );
 }

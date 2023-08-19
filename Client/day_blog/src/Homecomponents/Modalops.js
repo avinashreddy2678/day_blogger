@@ -51,11 +51,25 @@ function Modalops({
     e.preventDefault();
     if(home){
     axios.post(`${BASEURL}/posts/Home`, {
+<<<<<<< HEAD
+      title: postText.title,
+      post: postText.post,
+      author: window.localStorage.getItem("name"),
+      owner:window.localStorage.getItem("userid"),
+    });
+  }
+  else{
+    let myid= window.localStorage.getItem("postid");
+    axios.patch(`${BASEURL}/posts/update/${myid}`, {
+=======
+>>>>>>> a34dad6790b20306130c0bd988b1ae6db461d602
       title: postText.title,
       post: postText.post,
       author: window.localStorage.getItem("name"),
     });
   }
+<<<<<<< HEAD
+=======
   else{
     let myid= window.localStorage.getItem("postid");
     axios.patch(`${BASEURL}/posts/update/${myid}`, {
@@ -64,6 +78,7 @@ function Modalops({
       author: window.localStorage.getItem("name"),
     });
   }
+>>>>>>> a34dad6790b20306130c0bd988b1ae6db461d602
     handlePost();
     handleclose();
   };

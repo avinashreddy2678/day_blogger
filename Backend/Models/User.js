@@ -7,6 +7,6 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  
+  favs:[{type:mongoose.Schema.Types.ObjectId,ref:"posts"}],
 });
 export const UserModal = mongoose.model("user", UserSchema);

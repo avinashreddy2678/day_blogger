@@ -8,7 +8,7 @@ const saltRounds = 10;
 
 dotenv.config();
 router.post("/signup", async (req, res) => {
-    const { username, email, password } = req.body;
+    const { username, email, password } = req.body; 
     bcrypt.hash(password, saltRounds, function(err, hash) {
         const newUser = new UserModal({
             username: username,

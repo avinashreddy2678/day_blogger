@@ -19,7 +19,11 @@ function Login() {
  const  onSubmit=async (e)=>{
       e.preventDefault();
       try{
+<<<<<<< HEAD
+   const response=await axios.post(`http://localhost:5002/auth/login`,{
+=======
    let response=await axios.post(`${BASEURL}/auth/login`,{
+>>>>>>> a34dad6790b20306130c0bd988b1ae6db461d602
           email,password
       });
       if(response.data.Userid){

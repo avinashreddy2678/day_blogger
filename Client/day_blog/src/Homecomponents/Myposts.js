@@ -8,39 +8,42 @@ import { BASEURL } from "../helper";
 function Myposts() {
   const [data, setdata] = useState([]);
 
-  let userid = window.localStorage.getItem("name");
+  let useridd = window.localStorage.getItem("userid");
   const [cookies, Setcookiet] = useCookies(["access_token"]);
   const [, Setcookie] = useCookies(["name"]);
   let navigate = useNavigate();
 
-
   useEffect(() => {
     const fetchdata = async () => {
       try {
+<<<<<<< HEAD
+        const response = await axios.get(
+          `http://localhost:5002/posts/mypost/${useridd}`,
+          {
+            headers: { authorization: cookies.access_token },
+          }
+        );
+=======
         const response = await axios.get(`${BASEURL}/posts/mypost/${userid}`, {
           headers: { authorization: cookies.access_token }
         });
+>>>>>>> a34dad6790b20306130c0bd988b1ae6db461d602
         setdata(response.data.response);
       } catch (error) {
-        navigate('/auth/login');
+        navigate("/auth/login");
       }
     };
 
     fetchdata();
-  }, [data]); 
-
-
+  }, [data]);
 
   const logout = () => {
     Setcookiet("access_token", "");
     Setcookie("name", "");
-    window.localStorage.removeItem("userid");
+    window.localStorage.removeItem("useridd");
     window.localStorage.removeItem("name");
     navigate("/");
   };
-  
-
-
 
   return (
     <div className="background">
@@ -52,8 +55,8 @@ function Myposts() {
 
           <div>
             <ul class="navbar-nav">
-            <li class="nav-item px-5" className="nav-link">
-              <Link
+              <li class="nav-item px-5" className="nav-link">
+                <Link
                   to={`/posts/Home`}
                   style={{ textDecoration: "none", color: "black" }}
                 >
@@ -61,29 +64,45 @@ function Myposts() {
                 </Link>
               </li>
               <li class="nav-item p-5 " className="nav-link">
-              <Link to={`/posts/mypost/${userid}`} style={{textDecoration:"none",color:"black"}}>  
-                  <b >Myposts</b>
+                <Link
+                  to={`/posts/mypost/${useridd}`}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <b>Myposts</b>
+                </Link>
+              </li>
+              <li class="nav-item p-5 " className="nav-link">
+                <Link
+                  to={`/posts/fav/${useridd}`}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <b>Favroites</b>
                 </Link>
               </li>
               <li class="nav-item px-5" className="nav-link">
-              <b onClick={logout} style={{ cursor: "pointer",font:"bold" }} >logout</b>
+                <b onClick={logout} style={{ cursor: "pointer", font: "bold" }}>
+                  logout
+                </b>
               </li>
             </ul>
           </div>
         </div>
       </nav>
-      <div className="posts">
-  {data.length === 0 ? (
-    <h1>No Posts</h1>
-  ) : (
-    data.map((item) => (
-      <div className="singlepost shadow  bg-#aaa8a7 rounded" key={item.id} >
-        <Post item={item} mypost={true}/>
-      </div>
-    ))
-  )}
-</div>
 
+      <div className="posts">
+        {data.length === 0 ? (
+          <h1>No Posts</h1>
+        ) : (
+          data.map((item) => (
+            <div
+              className="singlepost shadow  bg-#aaa8a7 rounded"
+              key={item.id}
+            >
+              <Post item={item} mypost={true} />
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 }

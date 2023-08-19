@@ -5,6 +5,7 @@ import LogSign from './LogComponents/LogSign'
 import { Routes,Route } from 'react-router-dom'
 import Home from './Homecomponents/Home'
 import Myposts from './Homecomponents/Myposts'
+import Favorite from './Homecomponents/Favorite'
 function Log() {
   return (
     <div>
@@ -12,6 +13,7 @@ function Log() {
             <Route path='/' element={<LogSign/>}></Route>
             <Route path='/posts/Home' element={<Home/>}></Route>
             <Route path='/posts/mypost/:userid' element={<Myposts/>}></Route>
+            <Route path ='/posts/fav/:userid' element={<Favorite/>}/>
             <Route path='/auth/signup' element={<Signup/>}/>
             <Route path='/auth/login' element={<Login/>}/>
         </Routes>
