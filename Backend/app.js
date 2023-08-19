@@ -8,10 +8,8 @@ import { postrouter } from './Router/PostRouter.js';
 dotenv.config();
 const app = express();
 mongoose.connect(process.env.MONGODB);
-<<<<<<< HEAD
-=======
-
->>>>>>> a34dad6790b20306130c0bd988b1ae6db461d602
+//<<<<<<< HEAD
+// 
 app.use(Cors())
 app.use(express.json());
 
