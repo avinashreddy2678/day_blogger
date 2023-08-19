@@ -16,18 +16,11 @@ function Myposts() {
   useEffect(() => {
     const fetchdata = async () => {
       try {
-<<<<<<< HEAD
-        const response = await axios.get(
-          `http://localhost:5002/posts/mypost/${useridd}`,
-          {
-            headers: { authorization: cookies.access_token },
-          }
-        );
-=======
-        const response = await axios.get(`${BASEURL}/posts/mypost/${userid}`, {
+
+        const response = await axios.get(`${BASEURL}/posts/mypost/${useridd}`, {
           headers: { authorization: cookies.access_token }
         });
->>>>>>> a34dad6790b20306130c0bd988b1ae6db461d602
+// >>>>>>> a34dad6790b20306130c0bd988b1ae6db461d602
         setdata(response.data.response);
       } catch (error) {
         navigate("/auth/login");
